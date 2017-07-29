@@ -62,7 +62,6 @@
 
     <div class="row">
         <div class="jumbotron text-center">
-            {% if !metric.HideMAD %}
             <div id="container_{{metric.MetricID}}" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
             <script>
                 Highcharts.chart('container_{{metric.MetricID}}', {
@@ -92,7 +91,6 @@
                     series: [{data: [{{metric.DataHistory | slice:":10" | join:","}}]}]
                 });
             </script>
-            {% endif %}
         </div>
     </div>
 

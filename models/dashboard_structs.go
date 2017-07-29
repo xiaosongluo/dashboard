@@ -28,10 +28,10 @@ type DashboardMetric struct {
 	Label          string                 `json:"label"`
 	Status         string                 `json:"status"`
 	Value          float64                `json:"value,omitifempty"`
-	HistoricalData dashboardMetricHistory `json:"history,omitifempty"`
+	HistoricalData DashboardMetricHistory `json:"history,omitifempty"`
 }
 
-type dashboardMetricHistory []dashboardMetricStatus
+type DashboardMetricHistory []dashboardMetricStatus
 
 type dashboardMetricStatus struct {
 	Label  string  `json:"label"`
@@ -91,7 +91,7 @@ func LoadDashboard(dashid string, store db.DB) (*Dashboard, error) {
 func NewDashboardMetric() *DashboardMetric {
 	return &DashboardMetric{
 		Status:         "Unknown",
-		HistoricalData: dashboardMetricHistory{},
+		HistoricalData: DashboardMetricHistory{},
 	}
 }
 

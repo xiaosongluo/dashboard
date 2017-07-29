@@ -60,9 +60,7 @@ func GetDashboardJsonHandler(res http.ResponseWriter, req *http.Request) {
 			ID          string  `json:"id"`
 			Title       string  `json:"title"`
 			Description string  `json:"description"`
-			Label       string  `json:"label"`
-			Status      string  `json:"status"`
-			Value       float64 `json:"value"`
+			Data        models.DashboardMetricHistory  `json:"data,omitifempty"`
 		} `json:"metrics"`
 	}{}
 
@@ -72,16 +70,12 @@ func GetDashboardJsonHandler(res http.ResponseWriter, req *http.Request) {
 			ID          string  `json:"id"`
 			Title       string  `json:"title"`
 			Description string  `json:"description"`
-			Label       string  `json:"label"`
-			Status      string  `json:"status"`
-			Value       float64 `json:"value"`
+			Data        models.DashboardMetricHistory  `json:"data,omitifempty"`
 		}{
 			ID:          m.MetricID,
 			Title:       m.Title,
 			Description: m.Description,
-			Label:       m.Label,
-			Status:      m.Status,
-			Value:       m.Value,
+			Data:        m.HistoricalData,
 		})
 	}
 
