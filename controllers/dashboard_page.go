@@ -57,20 +57,20 @@ func GetDashboardJsonHandler(res http.ResponseWriter, req *http.Request) {
 	response := struct {
 		APIKey  string `json:"api_key,omitempty"`
 		Metrics []struct {
-			ID          string  `json:"id"`
-			Title       string  `json:"title"`
-			Description string  `json:"description"`
-			Data        models.DashboardMetricHistory  `json:"data,omitifempty"`
+			ID          string                        `json:"id"`
+			Title       string                        `json:"title"`
+			Description string                        `json:"description"`
+			Data        models.DashboardMetricHistory `json:"data,omitifempty"`
 		} `json:"metrics"`
 	}{}
 
 	// Filter out expired metrics
 	for _, m := range dash.Metrics {
 		response.Metrics = append(response.Metrics, struct {
-			ID          string  `json:"id"`
-			Title       string  `json:"title"`
-			Description string  `json:"description"`
-			Data        models.DashboardMetricHistory  `json:"data,omitifempty"`
+			ID          string                        `json:"id"`
+			Title       string                        `json:"title"`
+			Description string                        `json:"description"`
+			Data        models.DashboardMetricHistory `json:"data,omitifempty"`
 		}{
 			ID:          m.MetricID,
 			Title:       m.Title,
