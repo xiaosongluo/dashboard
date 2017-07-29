@@ -1,9 +1,9 @@
 package models
 
 import (
-	"time"
 	"crypto/md5"
 	"fmt"
+	"time"
 )
 
 //GenerateAPIKey generate api key

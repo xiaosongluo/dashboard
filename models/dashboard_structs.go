@@ -1,9 +1,9 @@
 package models
 
 import (
-	"github.com/xiaosongluo/dashboard/db"
 	"encoding/json"
 	"errors"
+	"github.com/xiaosongluo/dashboard/db"
 	"github.com/xiaosongluo/dashboard/utils"
 	"log"
 	"strconv"
@@ -34,9 +34,9 @@ type DashboardMetric struct {
 type dashboardMetricHistory []dashboardMetricStatus
 
 type dashboardMetricStatus struct {
-	Label  string `json:"label"`
-	Status string    `json:"status"`
-	Value  float64   `json:"value"`
+	Label  string  `json:"label"`
+	Status string  `json:"status"`
+	Value  float64 `json:"value"`
 }
 
 //LabelHistory

@@ -1,10 +1,10 @@
 package db
 
 import (
-	"os"
 	"fmt"
 	"github.com/xiaosongluo/dashboard/conf"
 	"io/ioutil"
+	"os"
 	"path"
 )
 

@@ -1,11 +1,11 @@
 package controllers
 
 import (
-	"net/http"
+	"encoding/json"
 	"github.com/flosch/pongo2"
 	"github.com/gorilla/mux"
 	"github.com/xiaosongluo/dashboard/models"
-	"encoding/json"
+	"net/http"
 )
 
 // GetDashboardHandller handle http request
@@ -55,26 +55,26 @@ func GetDashboardJsonHandler(res http.ResponseWriter, req *http.Request) {
 	}
 
 	response := struct {
-		APIKey string `json:"api_key,omitempty"`
+		APIKey  string `json:"api_key,omitempty"`
 		Metrics []struct {
-			ID          string    `json:"id"`
-			Title       string    `json:"title"`
-			Description string    `json:"description"`
-			Label       string `json:"label"`
-			Status      string    `json:"status"`
-			Value       float64   `json:"value"`
+			ID          string  `json:"id"`
+			Title       string  `json:"title"`
+			Description string  `json:"description"`
+			Label       string  `json:"label"`
+			Status      string  `json:"status"`
+			Value       float64 `json:"value"`
 		} `json:"metrics"`
 	}{}
 
 	// Filter out expired metrics
 	for _, m := range dash.Metrics {
 		response.Metrics = append(response.Metrics, struct {
-			ID          string    `json:"id"`
-			Title       string    `json:"title"`
-			Description string    `json:"description"`
-			Label       string `json:"label"`
-			Status      string    `json:"status"`
-			Value       float64   `json:"value"`
+			ID          string  `json:"id"`
+			Title       string  `json:"title"`
+			Description string  `json:"description"`
+			Label       string  `json:"label"`
+			Status      string  `json:"status"`
+			Value       float64 `json:"value"`
 		}{
 			ID:          m.MetricID,
 			Title:       m.Title,

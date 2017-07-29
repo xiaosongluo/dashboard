@@ -1,12 +1,12 @@
 package controllers
 
 import (
-	"net/http"
+	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	"io/ioutil"
-	"encoding/json"
 	"github.com/xiaosongluo/dashboard/models"
+	"io/ioutil"
+	"net/http"
 )
 
 // PutMetricHandller handle http request

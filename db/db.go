@@ -1,8 +1,8 @@
 package db
 
 import (
-	"github.com/xiaosongluo/dashboard/conf"
 	"fmt"
+	"github.com/xiaosongluo/dashboard/conf"
 )
 
 //DB interface for database

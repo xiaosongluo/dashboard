@@ -1,13 +1,13 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/xiaosongluo/dashboard/conf"
 	"github.com/xiaosongluo/dashboard/controllers"
 	"github.com/xiaosongluo/dashboard/db"
-	"github.com/xiaosongluo/dashboard/conf"
 	"github.com/xiaosongluo/dashboard/models"
+	"net/http"
 )
 
 func main() {

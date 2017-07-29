@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"net/http"
 	"github.com/flosch/pongo2"
+	"net/http"
 )
 
 // HomeHandler handle http request
