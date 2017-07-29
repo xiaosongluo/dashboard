@@ -25,7 +25,7 @@ func PutMetricHandller(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	dash, err := models.LoadDashboard(params["dashid"], models.Database)
+	dash, err := models.LoadDashboard(params["dashid"], models.Storage)
 	if err != nil {
 		if len(req.Header.Get("Authorization")) < 10 {
 			http.Error(res, "APIKey is too insecure", http.StatusUnauthorized)
@@ -35,7 +35,7 @@ func PutMetricHandller(res http.ResponseWriter, req *http.Request) {
 			APIKey:      req.Header.Get("Authorization"),
 			Metrics:     models.DashboardMetrics{},
 			DashboardID: params["dashid"],
-			Storage:     models.Database,
+			Storage:     models.Storage,
 		}
 	}
 
@@ -74,7 +74,7 @@ func PutMetricHandller(res http.ResponseWriter, req *http.Request) {
 // DeleteMetricHandller handle http request
 func DeleteMetricHandller(res http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
-	dash, err := models.LoadDashboard(params["dashid"], models.Database)
+	dash, err := models.LoadDashboard(params["dashid"], models.Storage)
 	if err != nil {
 		dash = &models.Dashboard{APIKey: req.Header.Get("Authorization"), Metrics: models.DashboardMetrics{}, DashboardID: params["dashid"]}
 	}

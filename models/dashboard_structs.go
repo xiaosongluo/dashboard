@@ -3,7 +3,7 @@ package models
 import (
 	"encoding/json"
 	"errors"
-	"github.com/xiaosongluo/dashboard/db"
+	"github.com/xiaosongluo/dashboard/storage"
 	"github.com/xiaosongluo/dashboard/utils"
 	"log"
 	"strconv"
@@ -14,7 +14,7 @@ type Dashboard struct {
 	DashboardID string           `json:"-"`
 	APIKey      string           `json:"api_key"`
 	Metrics     DashboardMetrics `json:"metrics"`
-	Storage     db.DB
+	Storage     storage.Storage
 }
 
 //DashboardMetrics
@@ -25,9 +25,9 @@ type DashboardMetric struct {
 	MetricID       string                 `json:"id"`
 	Title          string                 `json:"title"`
 	Description    string                 `json:"description"`
-	Label          string                 `json:"label"`
-	Status         string                 `json:"status"`
-	Value          float64                `json:"value,omitifempty"`
+	LastLabel      string                 `json:"last_label"`
+	LastStatus     string                 `json:"last_status"`
+	LastValue      float64                `json:"last_value,omitifempty"`
 	HistoricalData DashboardMetricHistory `json:"history,omitifempty"`
 }
 
@@ -72,7 +72,7 @@ func (dm *DashboardMetric) DataHistory() []string {
 }
 
 //LoadDashboard
-func LoadDashboard(dashid string, store db.DB) (*Dashboard, error) {
+func LoadDashboard(dashid string, store storage.Storage) (*Dashboard, error) {
 	data, err := store.Get(dashid)
 	if err != nil {
 		return &Dashboard{}, errors.New("Dashboard not found")
@@ -90,14 +90,14 @@ func LoadDashboard(dashid string, store db.DB) (*Dashboard, error) {
 //NewDashboardMetric
 func NewDashboardMetric() *DashboardMetric {
 	return &DashboardMetric{
-		Status:         "Unknown",
+		LastStatus:     "Unknown",
 		HistoricalData: DashboardMetricHistory{},
 	}
 }
 
 //IsValid
 func (dm *DashboardMetric) IsValid() (bool, string) {
-	if !utils.StringInSlice(dm.Status, []string{"OK", "Warning", "Critical", "Unknowm"}) {
+	if !utils.StringInSlice(dm.LastStatus, []string{"OK", "Warning", "Critical", "Unknowm"}) {
 		return false, "Status not allowed"
 	}
 
@@ -112,12 +112,12 @@ func (dm *DashboardMetric) IsValid() (bool, string) {
 func (dm *DashboardMetric) Update(m *DashboardMetric) {
 	dm.Title = m.Title
 	dm.Description = m.Description
-	dm.Status = m.Status
-	dm.Value = m.Value
+	dm.LastStatus = m.LastStatus
+	dm.LastValue = m.LastValue
 	dm.HistoricalData = append(dm.HistoricalData, dashboardMetricStatus{
-		Label:  "\"" + m.Label + "\"",
-		Status: m.Status,
-		Value:  m.Value,
+		Label:  "\"" + m.LastLabel + "\"",
+		Status: m.LastStatus,
+		Value:  m.LastValue,
 	})
 }
 

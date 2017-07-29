@@ -1,12 +1,12 @@
-package db
+package storage
 
 import (
 	"fmt"
-	"github.com/xiaosongluo/dashboard/conf"
+	"github.com/xiaosongluo/dashboard/config"
 )
 
 //DB interface for database
-type DB interface {
+type Storage interface {
 	Put(dashboardID string, data []byte) error
 	Get(dashboardID string) ([]byte, error)
 	Delete(dashboardID string) error
@@ -14,12 +14,11 @@ type DB interface {
 }
 
 //GetDatabase to get GetDatabase
-func GetDatabase(cfg *conf.Config) (DB, error) {
+func GetDatabase(cfg *config.Config) (Storage, error) {
 	switch cfg.Storage {
 	case "file":
-		return NewFileDatabase(cfg), nil
+		return NewFileStorage(cfg), nil
 	}
-
 	return nil, AdapterNotFoundError{cfg.Storage}
 }
 

@@ -5,15 +5,16 @@ import (
 	"github.com/flosch/pongo2"
 	"github.com/gorilla/mux"
 	"github.com/xiaosongluo/dashboard/models"
+	"github.com/xiaosongluo/dashboard/utils"
 	"net/http"
 )
 
 // GetDashboardHandller handle http request
 func GetDashboardHandller(res http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
-	dash, err := models.LoadDashboard(params["dashid"], models.Database)
+	dash, err := models.LoadDashboard(params["dashid"], models.Storage)
 	if err != nil {
-		dash = &models.Dashboard{APIKey: models.GenerateAPIKey(), Metrics: models.DashboardMetrics{}}
+		dash = &models.Dashboard{APIKey: utils.GenerateAPIKey(), Metrics: models.DashboardMetrics{}}
 	}
 
 	// Filter out expired metrics
@@ -24,14 +25,14 @@ func GetDashboardHandller(res http.ResponseWriter, req *http.Request) {
 		"dashid":  params["dashid"],
 		"metrics": metrics,
 		"apikey":  dash.APIKey,
-		"baseurl": models.Cfg.BaseURL,
+		"baseurl": models.Config.BaseURL,
 	}, res)
 }
 
 // DeleteDashboardHandller handle http request
 func DeleteDashboardHandller(res http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
-	dash, err := models.LoadDashboard(params["dashid"], models.Database)
+	dash, err := models.LoadDashboard(params["dashid"], models.Storage)
 	if err != nil {
 		http.Error(res, "This dashboard does not exist.", http.StatusInternalServerError)
 		return
@@ -42,16 +43,16 @@ func DeleteDashboardHandller(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	models.Database.Delete(params["dashid"])
+	models.Storage.Delete(params["dashid"])
 	http.Error(res, "OK", http.StatusOK)
 }
 
 // GetDashboardJsonHandler handle http request
 func GetDashboardJsonHandler(res http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
-	dash, err := models.LoadDashboard(params["dashid"], models.Database)
+	dash, err := models.LoadDashboard(params["dashid"], models.Storage)
 	if err != nil {
-		dash = &models.Dashboard{APIKey: models.GenerateAPIKey(), Metrics: models.DashboardMetrics{}}
+		dash = &models.Dashboard{APIKey: utils.GenerateAPIKey(), Metrics: models.DashboardMetrics{}}
 	}
 
 	response := struct {

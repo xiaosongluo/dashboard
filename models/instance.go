@@ -1,11 +1,11 @@
 package models
 
 import (
-	"github.com/xiaosongluo/dashboard/conf"
-	"github.com/xiaosongluo/dashboard/db"
+	"github.com/xiaosongluo/dashboard/config"
+	"github.com/xiaosongluo/dashboard/storage"
 )
 
 var (
-	Database db.DB        //Database
-	Cfg      *conf.Config //Cfg
+	Storage storage.Storage //Database
+	Config  *config.Config  //Cfg
 )
