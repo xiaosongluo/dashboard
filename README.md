@@ -1,2 +1,2 @@
 # dashboard
-init
+[![Build Status](https://travis-ci.org/xiaosongluo/dashboard.svg?branch=master)](https://travis-ci.org/xiaosongluo/dashboard)

@@ -13,7 +13,11 @@ go:
 
 # Skip the install step. Don't `go get` dependencies. Only build with the
 # code in vendor/
-install: true
+install:
+  - go get github.com/gorilla/mux
+  - go get github.com/Luzifer/rconfig
+  - go get github.com/flosch/pongo2
+  - go get
 
 matrix:
   # It's ok if our code fails on unstable development versions of Go.
