@@ -9,6 +9,7 @@ import (
 	"github.com/xiaosongluo/dashboard/models"
 )
 
+// PutMetricHandller handle http request
 func PutMetricHandller(res http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	body, err := ioutil.ReadAll(req.Body)
@@ -70,6 +71,7 @@ func PutMetricHandller(res http.ResponseWriter, req *http.Request) {
 	http.Error(res, "OK", http.StatusOK)
 }
 
+// DeleteMetricHandller handle http request
 func DeleteMetricHandller(res http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	dash, err := models.LoadDashboard(params["dashid"], models.Database)
@@ -93,4 +95,3 @@ func DeleteMetricHandller(res http.ResponseWriter, req *http.Request) {
 
 	http.Error(res, "OK", http.StatusOK)
 }
-

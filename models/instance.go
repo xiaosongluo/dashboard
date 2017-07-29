@@ -5,7 +5,7 @@ import (
 	"github.com/xiaosongluo/dashboard/conf"
 )
 
-var(
-	Database db.DB
-	Cfg      *conf.Config
+var (
+	Database db.DB        //Database
+	Cfg      *conf.Config //Cfg
 )

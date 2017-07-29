@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+//DB interface for database
 type DB interface {
 	Put(dashboardID string, data []byte) error
 	Get(dashboardID string) ([]byte, error)
@@ -12,6 +13,7 @@ type DB interface {
 	Exists(dashboardID string) (bool, error)
 }
 
+//GetDatabase to get GetDatabase
 func GetDatabase(cfg *conf.Config) (DB, error) {
 	switch cfg.Storage {
 	case "file":
@@ -36,6 +38,7 @@ type DashboardNotFoundError struct {
 	DashboardID string
 }
 
+//Error defines error
 func (e DashboardNotFoundError) Error() string {
 	return fmt.Sprintf("Dashboard with ID '%s' was not found.", e.DashboardID)
 }

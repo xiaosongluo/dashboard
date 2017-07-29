@@ -8,10 +8,12 @@ import (
 	"path"
 )
 
+//FileDatabase
 type FileDatabase struct {
 	cfg *conf.Config
 }
 
+//NewFileDatabase new a FileDatabase
 func NewFileDatabase(cfg *conf.Config) *FileDatabase {
 	// Create directory if not exists
 	if _, err := os.Stat(cfg.FileDatabase.Directory); os.IsNotExist(err) {
@@ -69,4 +71,3 @@ func (f *FileDatabase) Exists(dashboardID string) (bool, error) {
 func (f *FileDatabase) getFilePath(dashboardID string) string {
 	return path.Join(f.cfg.FileDatabase.Directory, dashboardID+".json")
 }
-

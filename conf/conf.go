@@ -1,9 +1,10 @@
 package conf
-import (
-"log"
-"net/url"
 
-"github.com/Luzifer/rconfig"
+import (
+	"log"
+	"net/url"
+
+	"github.com/Luzifer/rconfig"
 )
 
 var storageDrivers = []string{"s3", "file"}
@@ -13,7 +14,7 @@ type Config struct {
 	Storage  string `flag:"storage" default:"file" description:"Storage engine to use"`
 	BaseURL  string `flag:"baseurl" default:"httos://127.0.0.1:3000" env:"BASE_URL" description:" "The Base-URL the application is running on for example https://mondash.org"`
 	APIToken string `flag:"api-token" default:"1234567890" env:"API_TOKEN" description:"API Token used for the /welcome dashboard (you can choose your own)"`
-	Listen string `flag:"listen" default:":3000" description:"Address to listen on"`
+	Listen   string `flag:"listen" default:":3000" description:"Address to listen on"`
 	FileDatabase struct {
 		Directory string `flag:"fileDirectory" default:"./" description:"Directory to use for plain text storage"`
 	}
@@ -54,4 +55,3 @@ func (c Config) isValid() bool {
 
 	return true
 }
-

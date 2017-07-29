@@ -9,6 +9,7 @@ import (
 	"strconv"
 )
 
+//Dashboard struct
 type Dashboard struct {
 	DashboardID string           `json:"-"`
 	APIKey      string           `json:"api_key"`
@@ -16,8 +17,10 @@ type Dashboard struct {
 	Storage     db.DB
 }
 
+//DashboardMetrics
 type DashboardMetrics []*DashboardMetric
 
+//DashboardMetric
 type DashboardMetric struct {
 	MetricID       string                 `json:"id"`
 	Title          string                 `json:"title"`
@@ -36,6 +39,7 @@ type dashboardMetricStatus struct {
 	Value  float64   `json:"value"`
 }
 
+//LabelHistory
 func (dm *DashboardMetric) LabelHistory() []string {
 	s := []string{}
 
@@ -51,6 +55,7 @@ func (dm *DashboardMetric) LabelHistory() []string {
 	return s
 }
 
+//DataHistory
 func (dm *DashboardMetric) DataHistory() []string {
 	s := []string{}
 
@@ -66,6 +71,7 @@ func (dm *DashboardMetric) DataHistory() []string {
 	return s
 }
 
+//LoadDashboard
 func LoadDashboard(dashid string, store db.DB) (*Dashboard, error) {
 	data, err := store.Get(dashid)
 	if err != nil {
@@ -81,6 +87,7 @@ func LoadDashboard(dashid string, store db.DB) (*Dashboard, error) {
 	return tmp, nil
 }
 
+//NewDashboardMetric
 func NewDashboardMetric() *DashboardMetric {
 	return &DashboardMetric{
 		Status:         "Unknown",
@@ -88,6 +95,7 @@ func NewDashboardMetric() *DashboardMetric {
 	}
 }
 
+//IsValid
 func (dm *DashboardMetric) IsValid() (bool, string) {
 	if !utils.StringInSlice(dm.Status, []string{"OK", "Warning", "Critical", "Unknowm"}) {
 		return false, "Status not allowed"
@@ -100,6 +108,7 @@ func (dm *DashboardMetric) IsValid() (bool, string) {
 	return true, ""
 }
 
+//Update
 func (dm *DashboardMetric) Update(m *DashboardMetric) {
 	dm.Title = m.Title
 	dm.Description = m.Description
@@ -112,6 +121,7 @@ func (dm *DashboardMetric) Update(m *DashboardMetric) {
 	})
 }
 
+//Save
 func (d *Dashboard) Save() {
 	data, err := json.Marshal(d)
 	if err != nil {

@@ -11,7 +11,8 @@ var (
 	templates = make(map[string]*pongo2.Template)
 )
 
-func PreloadTemplates() (n int, err error){
+// PreloadTemplates finds the templates files
+func PreloadTemplates() (n int, err error) {
 	templateNames, err := ioutil.ReadDir("templates")
 	if err != nil {
 		panic("Templates directory not available!")
@@ -19,7 +20,7 @@ func PreloadTemplates() (n int, err error){
 	for _, tplname := range templateNames {
 		templates[tplname.Name()] = pongo2.Must(pongo2.FromFile(fmt.Sprintf("templates/%s", tplname.Name())))
 	}
-	return  len(templates), err
+	return len(templates), err
 }
 
 func renderTemplate(templateName string, context pongo2.Context, res http.ResponseWriter) {

@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 )
 
+// GetDashboardHandller handle http request
 func GetDashboardHandller(res http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	dash, err := models.LoadDashboard(params["dashid"], models.Database)
@@ -17,9 +18,7 @@ func GetDashboardHandller(res http.ResponseWriter, req *http.Request) {
 
 	// Filter out expired metrics
 	metrics := models.DashboardMetrics{}
-	for _, m := range dash.Metrics {
-		metrics = append(metrics, m)
-	}
+	metrics = append(metrics, dash.Metrics...)
 
 	renderTemplate("dashboard.html", pongo2.Context{
 		"dashid":  params["dashid"],
@@ -29,6 +28,7 @@ func GetDashboardHandller(res http.ResponseWriter, req *http.Request) {
 	}, res)
 }
 
+// DeleteDashboardHandller handle http request
 func DeleteDashboardHandller(res http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	dash, err := models.LoadDashboard(params["dashid"], models.Database)
@@ -46,6 +46,7 @@ func DeleteDashboardHandller(res http.ResponseWriter, req *http.Request) {
 	http.Error(res, "OK", http.StatusOK)
 }
 
+// GetDashboardJsonHandler handle http request
 func GetDashboardJsonHandler(res http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	dash, err := models.LoadDashboard(params["dashid"], models.Database)
