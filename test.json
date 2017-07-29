@@ -1,0 +1,51 @@
+{
+  "api_key": "fc04a75e6e945f4a3940f307c3f08a39",
+  "metrics": [
+    {
+      "id": "dect",
+      "title": "NO Detection",
+      "description": "检率",
+      "label": "",
+      "status": "Warning",
+      "value": 0.3,
+      "history": [
+        {
+          "label": "\"3.1.1\"",
+          "status": "Warning",
+          "value": 0.3
+        },
+        {
+          "label": "\"3.1.1\"",
+          "status": "Warning",
+          "value": 0.3
+        },
+        {
+          "label": "\"3.1.1\"",
+          "status": "Warning",
+          "value": 0.3
+        },
+        {
+          "label": "\"3.1.1\"",
+          "status": "Warning",
+          "value": 0.3
+        }
+      ]
+    },
+    {
+      "id": "dect1",
+      "title": "NO Detection",
+      "description": "检率",
+      "label": "",
+      "status": "Warning",
+      "value": 0.3,
+      "history": [
+        {
+          "label": "\"3.1.1\"",
+          "status": "Warning",
+          "value": 0.3
+        }
+      ]
+    }
+  ],
+  "Storage": {}
+}
