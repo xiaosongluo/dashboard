@@ -7,6 +7,7 @@ import (
 	"github.com/xiaosongluo/dashboard/controllers"
 	"github.com/xiaosongluo/dashboard/models"
 	"github.com/xiaosongluo/dashboard/storage"
+	"github.com/xiaosongluo/dashboard/utils"
 	"net/http"
 )
 
@@ -37,6 +38,6 @@ func main() {
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./statics/")))
 
-	http.Handle("/", router)
+	http.Handle("/", utils.LogHTTPRequest(router))
 	http.ListenAndServe(models.Config.Listen, nil)
 }
