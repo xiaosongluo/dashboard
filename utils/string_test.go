@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func Test_StringInSlice_Suceess(t *testing.T) {
+func Test_StringInSlice_Success(t *testing.T) {
 	if !StringInSlice("Warning", []string{"OK", "Warning", "Critical", "Unknowm"}) {
 		t.Error("Warning should in [OK, Warning, Critical, Unknowm]")
 	}

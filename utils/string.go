@@ -1,9 +1,9 @@
 package utils
 
 //StringInSlice
-func StringInSlice(a string, list []string) bool {
+func StringInSlice(content string, list []string) bool {
 	for _, b := range list {
-		if b == a {
+		if b == content {
 			return true
 		}
 	}
