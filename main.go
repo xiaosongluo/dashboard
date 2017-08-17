@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/xiaosongluo/dashboard/config"
 	"github.com/xiaosongluo/dashboard/controllers"
 	"github.com/xiaosongluo/dashboard/models"
 	"github.com/xiaosongluo/dashboard/storage"
-	"github.com/xiaosongluo/dashboard/utils"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -38,6 +39,6 @@ func main() {
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./statics/")))
 
-	http.Handle("/", utils.LogHTTPRequest(router))
+	http.Handle("/", handlers.LoggingHandler(os.Stdout, router))
 	http.ListenAndServe(models.Config.Listen, nil)
 }
