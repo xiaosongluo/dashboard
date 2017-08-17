@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"github.com/flosch/pongo2"
 	"github.com/gorilla/mux"
-	"github.com/xiaosongluo/dashboard/models"
-	"github.com/xiaosongluo/dashboard/utils"
+	"github.com/xiaosongluo/dashboard/app/models"
+	"github.com/xiaosongluo/dashboard/app/utils"
 	"net/http"
 )
 

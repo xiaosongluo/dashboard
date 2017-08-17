@@ -3,8 +3,8 @@ package models
 import (
 	"encoding/json"
 	"errors"
-	"github.com/xiaosongluo/dashboard/storage"
-	"github.com/xiaosongluo/dashboard/utils"
+	"github.com/xiaosongluo/dashboard/app/storage"
+	"github.com/xiaosongluo/dashboard/app/utils"
 	"log"
 	"strconv"
 )

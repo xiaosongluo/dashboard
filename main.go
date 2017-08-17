@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
+	"github.com/xiaosongluo/dashboard/app/controllers"
+	"github.com/xiaosongluo/dashboard/app/models"
+	"github.com/xiaosongluo/dashboard/app/storage"
 	"github.com/xiaosongluo/dashboard/config"
-	"github.com/xiaosongluo/dashboard/controllers"
-	"github.com/xiaosongluo/dashboard/models"
-	"github.com/xiaosongluo/dashboard/storage"
 	"net/http"
 	"os"
 )
