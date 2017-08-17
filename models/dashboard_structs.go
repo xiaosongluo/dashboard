@@ -97,7 +97,7 @@ func NewDashboardMetric() *DashboardMetric {
 
 //IsValid
 func (dm *DashboardMetric) IsValid() (bool, string) {
-	if !utils.StringInSlice(dm.LastStatus, []string{"OK", "Warning", "Critical", "Unknowm"}) {
+	if !utils.CheckStringInSlice(dm.LastStatus, []string{"OK", "Warning", "Critical", "Unknowm"}) {
 		return false, "Status not allowed"
 	}
 
