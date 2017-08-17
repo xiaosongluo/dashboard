@@ -2,7 +2,7 @@ package models
 
 import (
 	"github.com/xiaosongluo/dashboard/app/storage"
-	"github.com/xiaosongluo/dashboard/config"
+	"github.com/xiaosongluo/dashboard/app/utils/config"
 )
 
 var (

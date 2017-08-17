@@ -2,7 +2,7 @@ package storage
 
 import (
 	"fmt"
-	"github.com/xiaosongluo/dashboard/config"
+	"github.com/xiaosongluo/dashboard/app/utils/config"
 )
 
 //DB interface for database

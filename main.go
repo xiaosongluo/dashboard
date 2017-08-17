@@ -7,7 +7,7 @@ import (
 	"github.com/xiaosongluo/dashboard/app/controllers"
 	"github.com/xiaosongluo/dashboard/app/models"
 	"github.com/xiaosongluo/dashboard/app/storage"
-	"github.com/xiaosongluo/dashboard/config"
+	"github.com/xiaosongluo/dashboard/app/utils/config"
 	"net/http"
 	"os"
 )
