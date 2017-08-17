@@ -19,6 +19,7 @@ install:
   - go get github.com/flosch/pongo2
   - go get golang.org/x/tools/cmd/cover
   - go get github.com/mattn/goveralls
+  - go get github.com/modocache/gover
 
 matrix:
   # It's ok if our code fails on unstable development versions of Go.
@@ -45,8 +46,9 @@ before_script:
 # in a modern Go project.
 script:
   - test -z $(gofmt -s -l $GO_FILES)  # Fail if a .go file hasn't been formatted with gofmt
-  - go test -v -race $PKGS            # Run all the tests with the race detector enabled
-  - goveralls -service=travis-ci -coverpkg=./...
+  - go test -v -race $PKGS -cover     # Run all the tests with the race detector enabled
+  - gover
+  - goveralls -service=travis-ci -coverprofile=gover.coverprofile
 #  - go vet $PKGS                      # go vet is the official Go static analyzer
 #  - megacheck $PKGS                   # "go vet on steroids" + linter
 #  - golint -set_exit_status $PKGS     # one last linter
