@@ -17,7 +17,7 @@ install:
   - go get github.com/gorilla/mux
   - go get github.com/Luzifer/rconfig
   - go get github.com/flosch/pongo2
-  - go get
+  - go get github.com/mattn/goveralls
 
 matrix:
   # It's ok if our code fails on unstable development versions of Go.
@@ -44,7 +44,13 @@ before_script:
 # in a modern Go project.
 script:
   - test -z $(gofmt -s -l $GO_FILES)  # Fail if a .go file hasn't been formatted with gofmt
-  - go test -v -race $PKGS            # Run all the tests with the race detector enabled
+#  - go test -v -race $PKGS            # Run all the tests with the race detector enabled
+  - go test -v -covermode=count -coverprofile=coverage.out
+  - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
 #  - go vet $PKGS                      # go vet is the official Go static analyzer
 #  - megacheck $PKGS                   # "go vet on steroids" + linter
 #  - golint -set_exit_status $PKGS     # one last linter
+
+env:
+  global:
+    secure: "WGIAFZSbd4liybWCfZIBZ17UZ+2xqbCUjhr6oeqR+ymd8sEdSN8LoNdTS0LTPL9o4L50JPHImkNUrhot9rRyMxnjlO2aEGWzxqSyiL0b1BD/ZDpXT1dsCCy8GgnEb52wxgJzPrDnZGf9grHSobhjQv9wB5hu7ubNwYhulG/PQ0pwgTjSa0Vz8pYsGZJLzOiz8A5hmFmnil/xH7Cp/fff1QLYT4hW5WUFfQFR/ibE3tAoPALP13zRofJfLQ5aaT+KqXw43wCJiqzsbtc30KgiaQqaKfAH8TtkcfHjEGZQb9D9dJ88AWxH6hw5xrbTx8ZIK68yU4yJ0c/IeUni8F9V501An9n36MmT7N6ixjUQACg2KQQ5k6oRIVhxaYnZHolv3mCKCMKLntVvPbKxbl5kRPcXQW6uwf7UIgpOerw4/pJ+hFQA8I4CU/bwmQSnkVmOVirKr24Rxvtv1m/3n9x5fp41wVhsLF/XAXgZjwov9DeLYJOXcdWF7L6TXJbEYXaSpGycWkuvapcd8XvXQihcSnqlB5ut8Yfxl+9um2B0egIYxZGXJai/M1hOPibr7eZJyj/KaXNQpHErYb4LwsiJy/vdERVBPuPxC4bc22Mm5TTZFX3bBgKo71SscAVqY6xGQv1Ny1XU1Xx3OGp74JAV49TVhP6WeHrj+YG6sJFzuW8="
