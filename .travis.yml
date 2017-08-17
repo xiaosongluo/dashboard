@@ -17,6 +17,7 @@ install:
   - go get github.com/gorilla/mux
   - go get github.com/Luzifer/rconfig
   - go get github.com/flosch/pongo2
+  - go get golang.org/x/tools/cmd/cover
   - go get github.com/mattn/goveralls
 
 matrix:
@@ -45,7 +46,7 @@ before_script:
 script:
   - test -z $(gofmt -s -l $GO_FILES)  # Fail if a .go file hasn't been formatted with gofmt
 #  - go test -v -race $PKGS            # Run all the tests with the race detector enabled
-  - go test -v -covermode=count -coverprofile=coverage.out
+  - go test -v -race $PKGS -covermode=count -coverprofile=coverage.out
   - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
 #  - go vet $PKGS                      # go vet is the official Go static analyzer
 #  - megacheck $PKGS                   # "go vet on steroids" + linter
