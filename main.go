@@ -1,28 +1,34 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/xiaosongluo/dashboard/app/controllers"
+	"github.com/xiaosongluo/dashboard/app/database"
 	"github.com/xiaosongluo/dashboard/app/models"
+	"github.com/xiaosongluo/dashboard/app/server"
 	"github.com/xiaosongluo/dashboard/app/storage"
 	"github.com/xiaosongluo/dashboard/app/utils/config"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 func main() {
 
 	var err error
 
+	// Load the configuration file
+	config.Load("config"+string(os.PathSeparator)+"config.json", cfg)
+
 	_, err = controllers.PreloadTemplates()
 	if err != nil {
-		fmt.Printf("An error occurred while loading the storage handler: %s", err)
+		fmt.Printf("An error occurred while loading the templates handler: %s", err)
 	}
 
-	models.Config = config.Load()
-	models.Storage, err = storage.GetDatabase(models.Config)
+	models.Storage, err = storage.GetDatabase(cfg.Database)
 	if err != nil {
 		fmt.Printf("An error occurred while loading the storage handler: %s", err)
 	}
@@ -40,5 +46,20 @@ func main() {
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./statics/")))
 
 	http.Handle("/", handlers.LoggingHandler(os.Stdout, router))
-	http.ListenAndServe(models.Config.Listen, nil)
+
+	addr := cfg.Server.Hostname + ":" + strconv.Itoa(cfg.Server.HTTPPort)
+	http.ListenAndServe(addr, nil)
+}
+
+var cfg = &configuration{}
+
+// configuration contains the application settings
+type configuration struct {
+	Database database.Database `json:"Database"`
+	Server   server.Server     `json:"Server"`
+}
+
+// ParseJSON unmarshals bytes to structs
+func (c *configuration) ParseJSON(b []byte) error {
+	return json.Unmarshal(b, &c)
 }

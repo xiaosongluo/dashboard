@@ -2,7 +2,7 @@ package storage
 
 import (
 	"fmt"
-	"github.com/xiaosongluo/dashboard/app/utils/config"
+	"github.com/xiaosongluo/dashboard/app/database"
 	"io/ioutil"
 	"os"
 	"path"
@@ -10,20 +10,20 @@ import (
 
 //FileDatabase
 type FileStorage struct {
-	cfg *config.Config
+	db database.Database
 }
 
 //NewFileDatabase new a FileDatabase
-func NewFileStorage(cfg *config.Config) *FileStorage {
+func NewFileStorage(db database.Database) *FileStorage {
 	// Create directory if not exists
-	if _, err := os.Stat(cfg.FileDirectory.Directory); os.IsNotExist(err) {
-		if err := os.MkdirAll(cfg.FileDirectory.Directory, 0700); err != nil {
-			fmt.Printf("Could not create storage directory '%s'", cfg.FileDirectory.Directory)
+	if _, err := os.Stat(db.File.Path); os.IsNotExist(err) {
+		if err := os.MkdirAll(db.File.Path, 0700); err != nil {
+			fmt.Printf("Could not create storage directory '%s'", db.File.Path)
 			os.Exit(1)
 		}
 	}
 	return &FileStorage{
-		cfg: cfg,
+		db: db,
 	}
 }
 
@@ -65,5 +65,5 @@ func (f *FileStorage) Exists(dashboardID string) (bool, error) {
 }
 
 func (f *FileStorage) getFilePath(dashboardID string) string {
-	return path.Join(f.cfg.FileDirectory.Directory, dashboardID+".json")
+	return path.Join(f.db.File.Path, dashboardID+".json")
 }

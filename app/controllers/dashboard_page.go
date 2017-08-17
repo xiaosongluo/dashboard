@@ -25,7 +25,7 @@ func GetDashboardHandller(res http.ResponseWriter, req *http.Request) {
 		"dashid":  params["dashid"],
 		"metrics": metrics,
 		"apikey":  dash.APIKey,
-		"baseurl": models.Config.BaseURL,
+		"baseurl": "",
 	}, res)
 }
 

@@ -1,0 +1,23 @@
+{
+  "Database": {
+    "Type": "File",
+    "File": {
+      "Path": "./"
+    },
+    "MySQL": {
+      "Username": "root",
+      "Password": "",
+      "Name": "gowebapp",
+      "Hostname": "127.0.0.1",
+      "Port": 3306,
+      "Parameter": "?parseTime=true"
+    }
+  },
+  "Server": {
+    "Hostname": "",
+    "UseHTTP": true,
+    "UseHTTPS": false,
+    "HTTPPort": 3000,
+    "HTTPSPort": 443
+  }
+}

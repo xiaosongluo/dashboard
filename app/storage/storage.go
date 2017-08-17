@@ -2,7 +2,7 @@ package storage
 
 import (
 	"fmt"
-	"github.com/xiaosongluo/dashboard/app/utils/config"
+	"github.com/xiaosongluo/dashboard/app/database"
 )
 
 //DB interface for database
@@ -14,12 +14,12 @@ type Storage interface {
 }
 
 //GetDatabase to get GetDatabase
-func GetDatabase(cfg *config.Config) (Storage, error) {
-	switch cfg.Storage {
-	case "file":
-		return NewFileStorage(cfg), nil
+func GetDatabase(db database.Database) (Storage, error) {
+	switch db.Type {
+	case "File":
+		return NewFileStorage(db), nil
 	}
-	return nil, AdapterNotFoundError{cfg.Storage}
+	return nil, AdapterNotFoundError{db.Type}
 }
 
 // AdapterNotFoundError is a named error for more simple determination which
