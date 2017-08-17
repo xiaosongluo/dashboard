@@ -47,7 +47,7 @@ before_script:
 script:
   - test -z $(gofmt -s -l $GO_FILES)  # Fail if a .go file hasn't been formatted with gofmt
   - go test -v -race $PKGS -cover     # Run all the tests with the race detector enabled
-  - overalls -project=$PROJECT -covermode=count -ignore=.git,vendor -debug
+  - overalls -project=github.com/xiaosongluo/dashboard -covermode=count -ignore=.git,vendor -debug
   - goveralls -coverprofile=overalls.coverprofile -service=travis-ci
 #  - go vet $PKGS                      # go vet is the official Go static analyzer
 #  - megacheck $PKGS                   # "go vet on steroids" + linter
