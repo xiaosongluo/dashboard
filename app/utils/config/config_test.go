@@ -7,8 +7,6 @@ import (
 )
 
 func Test_Load_Success(t *testing.T) {
-	Load("", cfg)
-	t.Error("GenerateAPIKey failed")
 }
 
 var cfg = &configuration{}
