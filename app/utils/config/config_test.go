@@ -2,11 +2,29 @@ package config
 
 import (
 	"encoding/json"
+	"io"
 	"os"
 	"testing"
 )
 
 func Test_Load_Success(t *testing.T) {
+	filepath := &mockedFilePath{}
+	io := &mockedIO{}
+	ioutil := mockedIoutil{}
+
+	filepath.reportErr = false
+	filepath.reportAbsPath = "D:\test.json"
+	io.reportErr = false
+	io.reportErrType = nil
+	io.reportFile = nil
+	ioutil.reportErr = false
+	ioutil.reportErrType = nil
+	ioutil.reportByte = []byte(`{"id":1,"name":"cat"}`)
+
+	Load("test.json", cfg)
+	if cfg.Id != 1 || cfg.Name != "cat" {
+		t.Error("Load module information wrong!")
+	}
 }
 
 var cfg = &configuration{}
@@ -32,13 +50,6 @@ func (m mockedFilePath) Abs(path string) (string, error) {
 	return m.reportAbsPath, nil
 }
 
-type mockedFile struct {
-	// Embed this so we only need to add methods used by testable functions
-	os.File
-	fd   uintptr
-	name string
-}
-
 type mockedIO struct {
 	reportErr     bool
 	reportErrType error
@@ -50,4 +61,17 @@ func (m mockedIO) Open(name string) (*os.File, error) {
 		return nil, m.reportErrType
 	}
 	return m.reportFile, nil
+}
+
+type mockedIoutil struct {
+	reportErr     bool
+	reportErrType error
+	reportByte    []byte
+}
+
+func (m mockedIoutil) ReadAll(r io.Reader) ([]byte, error) {
+	if m.reportErr {
+		return nil, m.reportErrType
+	}
+	return m.reportByte, nil
 }
