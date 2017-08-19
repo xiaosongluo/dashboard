@@ -16,11 +16,9 @@ go:
 install:
   - go get github.com/gorilla/handlers
   - go get github.com/gorilla/mux
-  - go get github.com/Luzifer/rconfig
   - go get github.com/flosch/pongo2
-  - go get golang.org/x/tools/cmd/cover
-  - go get github.com/mattn/goveralls
-  - go get github.com/go-playground/overalls
+  - go get github.com/spf13/afero
+
 
 matrix:
   # It's ok if our code fails on unstable development versions of Go.
@@ -42,6 +40,9 @@ before_script:
   - PKGS=$(go list ./... | grep -v /vendor/)             # All the import paths, excluding vendor/
   - go get github.com/golang/lint/golint                 # Linter
   - go get honnef.co/go/tools/cmd/megacheck              # Badass static analyzer/linter
+  - go get golang.org/x/tools/cmd/cover
+  - go get github.com/mattn/goveralls
+  - go get github.com/go-playground/overalls
 
 # script always run to completion (set +e). All of these code checks are must haves
 # in a modern Go project.
