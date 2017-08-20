@@ -2,8 +2,8 @@ package config
 
 import (
 	"encoding/json"
-	"testing"
 	"github.com/spf13/afero"
+	"testing"
 )
 
 func Test_Load_Success(t *testing.T) {
