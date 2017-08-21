@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 )
 
 // Error404 handles 404 - Page Not Found

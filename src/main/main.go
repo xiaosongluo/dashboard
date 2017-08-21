@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"github.com/xiaosongluo/dashboard/src/app/database"
 	"github.com/xiaosongluo/dashboard/src/app/models"
+	"github.com/xiaosongluo/dashboard/src/app/route"
 	"github.com/xiaosongluo/dashboard/src/app/server"
 	"github.com/xiaosongluo/dashboard/src/app/storage"
 	"github.com/xiaosongluo/dashboard/src/app/utils/config"
-	"os"
-	"github.com/xiaosongluo/dashboard/src/app/route"
 	"github.com/xiaosongluo/dashboard/src/app/view"
+	"os"
 )
 
 func main() {

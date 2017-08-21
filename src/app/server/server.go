@@ -1,10 +1,10 @@
 package server
 
 import (
-	"net/http"
 	"fmt"
-	"time"
 	"log"
+	"net/http"
+	"time"
 )
 
 type Server struct {

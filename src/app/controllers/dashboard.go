@@ -6,8 +6,8 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/xiaosongluo/dashboard/src/app/models"
 	"github.com/xiaosongluo/dashboard/src/app/utils"
-	"net/http"
 	"github.com/xiaosongluo/dashboard/src/app/view"
+	"net/http"
 )
 
 // GetDashboardHandller handle http request

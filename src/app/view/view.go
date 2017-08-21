@@ -1,9 +1,9 @@
 package view
 
 import (
-	"io/ioutil"
-	"github.com/flosch/pongo2"
 	"fmt"
+	"github.com/flosch/pongo2"
+	"io/ioutil"
 	"net/http"
 )
 

@@ -1,10 +1,10 @@
 package route
 
 import (
-	"github.com/gorilla/mux"
-	"net/http"
-	"github.com/xiaosongluo/dashboard/src/app/controllers"
 	"fmt"
+	"github.com/gorilla/mux"
+	"github.com/xiaosongluo/dashboard/src/app/controllers"
+	"net/http"
 	"time"
 )
 
@@ -31,7 +31,6 @@ func redirectToHTTPS(w http.ResponseWriter, req *http.Request) {
 	http.Redirect(w, req, "https://"+req.Host, http.StatusMovedPermanently)
 }
 
-
 // *****************************************************************************
 // Routes
 // *****************************************************************************
@@ -54,7 +53,7 @@ func routes() *mux.Router {
 func middleware(h http.Handler) http.Handler {
 
 	// Log every request
-	h=handler(h)
+	h = handler(h)
 
 	return h
 }
