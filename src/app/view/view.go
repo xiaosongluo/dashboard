@@ -1,9 +1,9 @@
-package controllers
+package view
 
 import (
-	"fmt"
-	"github.com/flosch/pongo2"
 	"io/ioutil"
+	"github.com/flosch/pongo2"
+	"fmt"
 	"net/http"
 )
 
@@ -23,7 +23,7 @@ func PreloadTemplates() (n int, err error) {
 	return len(templates), err
 }
 
-func renderTemplate(templateName string, context pongo2.Context, res http.ResponseWriter) {
+func RenderTemplate(templateName string, context pongo2.Context, res http.ResponseWriter) {
 	if tpl, ok := templates[templateName]; ok {
 		_ = tpl.ExecuteWriter(context, res)
 	} else {

@@ -14,7 +14,6 @@ go:
 # Skip the install step. Don't `go get` dependencies. Only build with the
 # code in vendor/
 install:
-  - go get github.com/gorilla/handlers
   - go get github.com/gorilla/mux
   - go get github.com/flosch/pongo2
   - go get github.com/spf13/afero

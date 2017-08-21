@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"github.com/flosch/pongo2"
 	"github.com/gorilla/mux"
-	"github.com/xiaosongluo/dashboard/app/models"
-	"github.com/xiaosongluo/dashboard/app/utils"
+	"github.com/xiaosongluo/dashboard/src/app/models"
+	"github.com/xiaosongluo/dashboard/src/app/utils"
 	"net/http"
+	"github.com/xiaosongluo/dashboard/src/app/view"
 )
 
 // GetDashboardHandller handle http request
@@ -21,7 +22,7 @@ func GetDashboardHandller(res http.ResponseWriter, req *http.Request) {
 	metrics := models.DashboardMetrics{}
 	metrics = append(metrics, dash.Metrics...)
 
-	renderTemplate("dashboard.html", pongo2.Context{
+	view.RenderTemplate("dashboard.html", pongo2.Context{
 		"dashid":  params["dashid"],
 		"metrics": metrics,
 		"apikey":  dash.APIKey,
