@@ -2,7 +2,7 @@ package storage
 
 import (
 	"fmt"
-	"github.com/xiaosongluo/dashboard/app/database"
+	"github.com/xiaosongluo/dashboard/src/app/database"
 	"io/ioutil"
 	"os"
 	"path"

@@ -18,6 +18,8 @@
     "UseHTTP": true,
     "UseHTTPS": false,
     "HTTPPort": 3000,
-    "HTTPSPort": 443
+    "HTTPSPort": 443,
+    "CertFile": "tls/server.crt",
+    "KeyFile": "tls/server.key"
   }
 }

@@ -1,4 +1,4 @@
-package controllers
+package view
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ func PreloadTemplates() (n int, err error) {
 	return len(templates), err
 }
 
-func renderTemplate(templateName string, context pongo2.Context, res http.ResponseWriter) {
+func RenderTemplate(templateName string, context pongo2.Context, res http.ResponseWriter) {
 	if tpl, ok := templates[templateName]; ok {
 		_ = tpl.ExecuteWriter(context, res)
 	} else {

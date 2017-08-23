@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	"github.com/xiaosongluo/dashboard/app/models"
+	"github.com/xiaosongluo/dashboard/src/app/models"
 	"io/ioutil"
 	"net/http"
 )
